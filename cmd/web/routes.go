@@ -6,11 +6,14 @@ import (
   )
 
 
-func routes() http.Handler {
+func (app *application) routes() http.Handler {
 
   mux := pat.New()
-
-  mux.Get("/", http.HandlerFunc(home))
+//added other routes
+  mux.Get("/", http.HandlerFunc(app.home))
+  mux.Get("/about", http.HandlerFunc(app.about))
+  mux.Get("/calendar", http.HandlerFunc(app.calendar))
+  mux.Get("/forum", http.HandlerFunc(app.forum))
 
 
   return mux
