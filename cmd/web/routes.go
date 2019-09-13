@@ -14,7 +14,6 @@ func (app *application) routes() http.Handler {
   mux.Get("/about", http.HandlerFunc(app.about))
   mux.Get("/calendar", http.HandlerFunc(app.calendar))
   mux.Get("/forum", http.HandlerFunc(app.forum))
-  mux.Get("/user/signin", http.HandlerFunc(app.signinForm))
 
 
   return mux

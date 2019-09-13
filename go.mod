@@ -1,4 +1,4 @@
-module seattleGophers.com/website
+module github.com/seattlegophers/website
 
 go 1.12
 

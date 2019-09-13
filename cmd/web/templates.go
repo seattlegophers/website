@@ -3,14 +3,12 @@ package main
 import (
   "path/filepath"
   "html/template"
-  "seattleGophers.com/website/pkg/forms"
 )
 
 type templateData struct {
   CurrentYear       int
   IsAuthenticated   bool
   CSRFToken         string
-  Form              *forms.Form
 }
 
 func newTemplateCache(dir string) (map[string]*template.Template, error) {
