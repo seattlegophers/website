@@ -1,0 +1,3 @@
+FROM golang:1.13.0-buster
+WORKDIR /app
+CMD go run ./cmd/web
