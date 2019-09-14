@@ -9,7 +9,6 @@ import (
   "html/template"
   )
 
-//created type application in order to facilitate passing data for sessions
 type application struct {
   infoLog          *log.Logger
   errorLog         *log.Logger
@@ -20,7 +19,7 @@ type application struct {
 
 
 func main() {
-  addr := flag.String("addr", ":3333", "Port to accept incoming connections")
+  addr := flag.String("addr", ":8080", "Port to accept incoming connections")
   flag.Parse()
 
   infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
