@@ -1,0 +1,3 @@
+FROM mysql:5.7
+RUN mkdir /app
+COPY ./init.sql /app/init.sql
