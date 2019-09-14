@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: web.docker
+    container_name: web
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app
+    depends_on:
+      - mysql
+    environment:
+      - "DB_PORT=${DB_PORT}"
+      - "DB_HOST=&{DB_HOST}"
+      - "DB_USERNAME=${DB_USERNAME}"
+      - "DB_PASSWORD=${DB_PASSWORD}"
+    links:
+      - mysql
+  mysql:
+    build:
+      context: ./
+      dockerfile: mysql.docker
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "e"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    expose:
+      - "3306"
+    command: mysqld --init-file="/app/init.sql"
