@@ -1,6 +1,7 @@
 package main
 
 import (
+  "time"
   "flag"
   "log"
   "crypto/tls"
@@ -31,6 +32,7 @@ type application struct {
 
 func main() {
   addr := flag.String("addr", ":8080", "Port to accept incoming connections")
+  secret := flag.String("secret", "s6Ndh+pPbnzHbS*+9Pk8qGwhtzbpa@ge", "Secret Key")
   flag.Parse()
 
   infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
@@ -41,10 +43,14 @@ func main() {
     errorLog.Fatal(err)
     }
 
+  session := sessions.New([]byte(*secret))
+  session.Lifetime = 12 * time.Hour
+
   app := &application {
     errorLog:        errorLog,
     infoLog:         infoLog,
     templateCache:   templateCache,
+    session:         session,
     }
 
   tlsConfig := &tls.Config {
