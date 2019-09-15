@@ -6,7 +6,6 @@ import (
   "seattleGophers.com/website/pkg/models"
 )
 
-
 func (app *application) authenticate(next http.Handler) http.Handler {
   return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
     exists := app.session.Exists(r, "authenticatedUserID")

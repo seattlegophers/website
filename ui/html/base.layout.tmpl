@@ -18,7 +18,11 @@
       <a href='/about'>About</a>
       <a href='/calendar'>Calendar</a>
       <a href='/forum'>Forum</a>
+      {{ if .IsAuthenticated }}
       <a href='/user/signin'>Sign In</a>
+      {{ else }}
+      <a href='/user/signup'>Register</a>
+      {{ end }}
       </div>
     </nav>
     <section>
