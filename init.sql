@@ -29,5 +29,5 @@ CREATE TABLE post (
 );
 
 ALTER TABLE user_account ADD UNIQUE (email);
-GRANT SELECT, INSERT, UPDATE ON seattleGophers.* TO 'mysqlUser'@'localhost';
+GRANT all PRIVILEGES ON *.* TO 'mysqlUser'@'localhost';
 ALTER USER 'mysqlUser'@'localhost' IDENTIFIED BY 'pwd';
