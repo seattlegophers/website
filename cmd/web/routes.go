@@ -15,6 +15,7 @@ func (app *application) routes() http.Handler {
   mux.Get("/calendar", http.HandlerFunc(app.calendar))
   mux.Get("/forum", http.HandlerFunc(app.forum))
   mux.Get("/user/signin", http.HandlerFunc(app.signinForm))
+  mux.Post("/user/signup", http.HandlerFunc(app.signUp))//Implement this
 
 
   return mux
