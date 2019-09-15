@@ -7,12 +7,23 @@ import (
   "os"
   "net/http"
   "html/template"
+  "github.com/golangcollege/sessions"
+  "seattleGophers.com/website/pkg/models"
   )
+
+type contextKey string
+var contextKeyIsAuthenticated = contextKey("isAuthenticated")
 
 type application struct {
   infoLog          *log.Logger
   errorLog         *log.Logger
   templateCache    map[string]*template.Template
+  session          *sessions.Session
+  users            interface {
+    Insert(string, string, string) error
+    Authenticate(string, string) (int, error)
+    Get(int) (*models.User, error)
+  }
 }
 
 
