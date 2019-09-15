@@ -23,3 +23,6 @@ func (app *application) signinForm(w http.ResponseWriter, r *http.Request) {
     Form:  forms.New(nil),
   })
 }
+func (app *application) signUp(w http.ResponseWriter, r *http.Request) {
+  app.render(w, r, "home.page.tmpl", nil)//placeholder
+}
