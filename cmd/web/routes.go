@@ -2,15 +2,18 @@ package main
 
 import (
   "net/http"
-  "github.com/bmizerany/pat" //allows us to do request based routing
+  "github.com/bmizerany/pat"
+  "github.com/justinas/alice"
   )
 
 
 func (app *application) routes() http.Handler {
 
+  dynamicMiddleware := alice.New(app.session.Enable, app.authenticate)
+
   mux := pat.New()
 //added other routes
-  mux.Get("/", http.HandlerFunc(app.home))
+  mux.Get("/", dynamicMiddleware.ThenFunc(app.home))
   mux.Get("/about", http.HandlerFunc(app.about))
   mux.Get("/calendar", http.HandlerFunc(app.calendar))
   mux.Get("/forum", http.HandlerFunc(app.forum))
