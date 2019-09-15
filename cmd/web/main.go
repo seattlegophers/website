@@ -20,6 +20,7 @@ type application struct {
   errorLog         *log.Logger
   templateCache    map[string]*template.Template
   session          *sessions.Session
+  IsAuthenticated  bool
   users            interface {
     Insert(string, string, string) error
     Authenticate(string, string) (int, error)
