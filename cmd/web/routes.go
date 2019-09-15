@@ -18,7 +18,7 @@ func (app *application) routes() http.Handler {
   mux.Get("/calendar", dynamicMiddleware.ThenFunc(app.calendar))
   mux.Get("/forum", dynamicMiddleware.ThenFunc(app.forum))
   mux.Get("/user/signin", dynamicMiddleware.ThenFunc(app.signinForm))
-  mux.Post("/user/signup", dynamicMiddleware.ThenFunc(app.signUp))//Implement this
+  mux.Get("/user/register", dynamicMiddleware.ThenFunc(app.registerForm))//Implement this
 
 
   return mux

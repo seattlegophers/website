@@ -10,15 +10,16 @@ services:
     volumes:
       - ./:/app
     depends_on:
-      - mysql
+      - db 
     environment:
       - "DB_PORT=${DB_PORT}"
       - "DB_HOST=&{DB_HOST}"
       - "DB_USERNAME=${DB_USERNAME}"
       - "DB_PASSWORD=${DB_PASSWORD}"
     links:
-      - mysql
-  mysql:
+      - db
+    tty: true
+  db:
     build:
       context: ./
       dockerfile: mysql.docker
@@ -27,6 +28,7 @@ services:
       MYSQL_ROOT_PASSWORD: "e"
       MYSQL_USER: "${DB_USERNAME}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
-    expose:
-      - "3306"
+    ports:
+      - "3306:3306"
     command: mysqld --init-file="/app/init.sql"
+    tty: true
