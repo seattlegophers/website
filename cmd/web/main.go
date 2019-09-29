@@ -72,7 +72,7 @@ func main() {
     }
   infoLog.Printf("Starting server on %s", *addr)
   //   $ cd tls; go run /usr/local/go/src/crypto/tls/generate_cert.go --rsa-bits=2048 --host=localhost
-  go http.ListenAndServe(":8080", http.HandlerFunc(redirect) 
+  go http.ListenAndServe(":8080", http.HandlerFunc(redirect)) 
   err = srv.ListenAndServeTLS("./tls/cert.pem", "./tls/key.pem")
   errorLog.Fatal(err)
 }
