@@ -72,6 +72,7 @@ func main() {
     }
   infoLog.Printf("Starting server on %s", *addr)
   //   $ cd tls; go run /usr/local/go/src/crypto/tls/generate_cert.go --rsa-bits=2048 --host=localhost
+  go http.ListenAndServe(":8080", http.HandlerFunc(redirect) 
   err = srv.ListenAndServeTLS("./tls/cert.pem", "./tls/key.pem")
   errorLog.Fatal(err)
 }
@@ -85,4 +86,13 @@ func openDB(dsn string) (*sql.DB, error) {
     return nil, err
   }
   return db, nil
+}
+func redirect(w http.ResponseWriter, r *http.Request) {
+  target := "https://" + r.Host + r.URL.Path
+  if len(r.URL.RawQuery) > 0 {
+    target += "?" + r.URL.RawQuery
+  }
+  log.Printf("redirect to: %s", target)
+  http.Redirect(w, r, target,
+    http.StatusTemporaryRedirect)
 }
